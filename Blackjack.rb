@@ -66,11 +66,12 @@ class Game
       show_hands_final
       self.dealers_score += 1
       score
+      replay
     elsif player_hand_total == 21
       puts "\n#{player_hand_total}, you win!"
       show_hands_final
-      declare_winner
       self.players_score += 1
+      replay
     end
   end
 
@@ -90,7 +91,7 @@ class Game
       puts "\nYou Win with a score of #{player_hand_total} and a dealer score of #{dealer_hand_total}!"
       self.players_score += 1
       score
-    elsif player_hand_total > dealer_hand_total
+    elsif dealer_hand_total > 21 || player_hand_total > dealer_hand_total
       puts "\nYou Win with a score of #{player_hand_total} and a dealer score of #{dealer_hand_total}!"
       self.players_score += 1
       score
@@ -99,11 +100,29 @@ class Game
       self.dealers_score += 1
       score
     end
+    replay
   end
 
   #Added as an idea for tracking win count for multiple games (need a restart method to do so)
   def score
     puts "\n---PLAYER 1: #{self.players_score} -- DEALER: #{self.dealers_score}---"
+  end
+
+  def replay
+    puts "Do you want to play again (y/n)"
+    desire = gets.chomp
+
+    if desire == "y"
+      @deck = Deck.new
+      @players_hand = deck.card.pop(2)
+      @dealers_hand = deck.card.pop(2)
+      self.play
+    elsif desire == "n"
+      exit
+    else
+      puts "Please answer with y or n"
+      replay
+    end
   end
 
   def player_hit
