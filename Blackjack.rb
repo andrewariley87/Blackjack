@@ -71,6 +71,7 @@ class Game
       puts "\n#{player_hand_total}, you win!"
       show_hands_final
       self.players_score += 1
+      score
       replay
     end
   end
