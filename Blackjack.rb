@@ -1,7 +1,7 @@
 require_relative 'card'
 require_relative 'deck'
 require 'io/console'
-
+# even more stuff
 class Game
 
   attr_accessor :deck,
